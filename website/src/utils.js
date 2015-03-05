@@ -11,7 +11,9 @@ module.exports.ga = undefined; // set Google Analytics on nconf init
 
 module.exports.sendEmail = function(mailData) {
   var smtpTransport = nodemailer.createTransport("SMTP",{
-    service: nconf.get('SMTP_SERVICE'),
+    host: nconf.get('SMTP_HOST'),
+    port: nconf.get('SMTP_PORT'),
+    secure: nconf.get('SMTP_TLS'),
     auth: {
       user: nconf.get('SMTP_USER'),
       pass: nconf.get('SMTP_PASS')
