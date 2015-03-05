@@ -1,17 +1,31 @@
 var nodemailer = require('nodemailer');
 var nconf = require('nconf');
+var path = require("path");
 
-var smtpTransport = nodemailer.createTransport("SMTP",{
-	host: nconf.get('SMTP_HOST'),
-	port: nconf.get('SMTP_PORT'),
-	secure: nconf.get('SMTP_TLS'),
-	auth: {
-		user: nconf.get('SMTP_USER'),
-		pass: nconf.get('SMTP_PASS')
-	}
-});
+nconf.argv()
+	.env()
+	.file('user', path.join(path.resolve(__dirname, './../../config.json')));
 
+var host = nconf.get('SMTP_HOST');
+var port = nconf.get('SMTP_PORT');
+var secure = nconf.get('SMTP_TLS');
+var user = nconf.get('SMTP_USER');
+var pass = nconf.get('SMTP_PASS');
+
+// Create a SMTP transport object
+var smtpTransport = nodemailer.createTransport("SMTP", {
+	host: host,
+	port: port,
+	secure: secure,
+        auth: {
+            user: user,
+            pass: pass
+        }
+    });
+
+console.log(host, port, secure, user, pass);
 console.log('SMTP Configured');
+
 
 // Message object
 var message = {
@@ -75,5 +89,5 @@ smtpTransport.sendMail(message, function(error){
     console.log('Message sent successfully!');
 
     // if you don't want to use this transport object anymore, uncomment following line
-    //smtpTransport.close(); // close the connection pool
+    smtpTransport.close(); // close the connection pool
 });
