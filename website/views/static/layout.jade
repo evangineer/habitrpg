@@ -39,7 +39,7 @@ html(ng-app='habitrpg')
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='/static/front') HabitRPG
+          a.navbar-brand(href='/static/front') Habit Game
         .collapse.navbar-collapse(collapse="isNavbarCollapsed")
           ul.nav.navbar-nav
             //li(class='#{menuItem=="features" ? "active" : ""}')
@@ -53,7 +53,7 @@ html(ng-app='habitrpg')
             //li(class='#{menuItem=="pressKit" ? "active" : ""}')
             //  a(href='/static/press-kit') Press Kit
             li(class='#{menuItem=="contact" ? "active" : ""}')
-              a(href='mailto:play@raisingyourga.me') Email Us
+              a(href='http://raisingyourga.me/') back to Raisingyouga.me
 
           button#header-play-button.btn.btn-primary.navbar-btn.navbar-right(ng-click='playButtonClick()')=env.t('playButton')
 
