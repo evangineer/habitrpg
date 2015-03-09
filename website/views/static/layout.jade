@@ -42,18 +42,18 @@ html(ng-app='habitrpg')
           a.navbar-brand(href='/static/front') HabitRPG
         .collapse.navbar-collapse(collapse="isNavbarCollapsed")
           ul.nav.navbar-nav
-            li(class='#{menuItem=="features" ? "active" : ""}')
-              a(href='/static/features')=env.t('companyAbout')
-            li(class='#{menuItem=="videos" ? "active" : ""}')
-              a(href='/static/videos')=env.t('companyVideos')
+            //li(class='#{menuItem=="features" ? "active" : ""}')
+            //  a(href='/static/features')=env.t('companyAbout')
+            //li(class='#{menuItem=="videos" ? "active" : ""}')
+            //  a(href='/static/videos')=env.t('companyVideos')
             li
-              a(href='http://blog.habitrpg.com/')=env.t('companyBlog')
-            li(class='#{menuItem=="plans" ? "active" : ""}')
-              a(href='/static/plans')=env.t('groupPlans')
-            li(class='#{menuItem=="pressKit" ? "active" : ""}')
-              a(href='/static/press-kit') Press Kit
+              a(href='http://raisingyourga.me/blog/')=env.t('companyBlog')
+            //li(class='#{menuItem=="plans" ? "active" : ""}')
+            // a(href='/static/plans')=env.t('groupPlans')
+            //li(class='#{menuItem=="pressKit" ? "active" : ""}')
+            //  a(href='/static/press-kit') Press Kit
             li(class='#{menuItem=="contact" ? "active" : ""}')
-              a(href='/static/contact')=env.t('contactUs')
+              a(href='mailto:play@raisingyourga.me') Email Us
 
           button#header-play-button.btn.btn-primary.navbar-btn.navbar-right(ng-click='playButtonClick()')=env.t('playButton')
 
