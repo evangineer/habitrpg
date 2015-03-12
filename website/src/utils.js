@@ -9,23 +9,7 @@ var isProd, baseUrl;
 
 module.exports.ga = undefined; // set Google Analytics on nconf init
 
-module.exports.sendEmail = function(mailData) {
-  var smtpTransport = nodemailer.createTransport("SMTP",{
-    host: nconf.get('SMTP_HOST'),
-    port: nconf.get('SMTP_PORT'),
-    secure: nconf.get('SMTP_TLS'),
-    auth: {
-      user: nconf.get('SMTP_USER'),
-      pass: nconf.get('SMTP_PASS')
-    }
-  });
-  smtpTransport.sendMail(mailData, function(error, response){
-      var logging = require('./logging');
-    if(error) logging.error(error);
-    else logging.info("Message sent: " + response.message);
-    smtpTransport.close(); // shut down the connection pool, no more messages
-  });
-}
+//module.exports.sendEmail = function(mailData) {}
 
 function getUserInfo(user, fields) {
   var info = {};
@@ -54,58 +38,8 @@ function getUserInfo(user, fields) {
 }
 
 module.exports.getUserInfo = getUserInfo;
-
+  
 module.exports.txnEmail = function(mailingInfoArray, emailType, variables){
-  var mailingInfoArray = Array.isArray(mailingInfoArray) ? mailingInfoArray : [mailingInfoArray];
-  var variables = [
-    {name: 'BASE_URL', content: baseUrl}
-  ].concat(variables || []);
-
-  // It's important to pass at least a user with its `preferences` as we need to check if he unsubscribed
-  mailingInfoArray = mailingInfoArray.map(function(mailingInfo){
-    return mailingInfo._id ? getUserInfo(mailingInfo, ['email', 'name', 'canSend']) : mailingInfo;
-  }).filter(function(mailingInfo){
-    return (mailingInfo.email && mailingInfo.canSend);
-  });
-
-  // create reusable transport method (opens pool of SMTP connections)
-  var smtpTransport = nodemailer.createTransport("SMTP",{
-      host: "mail.gandi.net", // hostname
-      secureConnection: true, // use SSL
-      port: 465, // port for secure SMTP
-      auth: {
-          user: "admin@raisingyourga.me",
-          pass: "kKrP09bK5v7vcBFa5SlfVPZG8"
-      }
-  });
-
-console.log("##############");
-console.log(variables);
-console.log("##############");
-  // setup e-mail data with unicode symbols
-  var mailOptions = {
-      from: "Test ✔ <play@raisingyourga.me>", // sender address
-      to: mailingInfoArray[0].email,
-      subject: "test ✔", // Subject line
-      text: "test ✔", // plaintext body
-      html: "variables✔" // html body
-  };
-
-  // send mail with defined transport object
-  smtpTransport.sendMail(mailOptions, function(error, response){
-      if(error){
-          console.log(error);
-      }else{
-          console.log("Message sent: " + response.message);
-      }
-
-      // if you don't want to use this transport object anymore, uncomment following line
-      smtpTransport.close(); // shut down the connection pool, no more messages
-  });
-
-}
-
-module.exports.txnEmailOld = function(mailingInfoArray, emailType, variables){
   var mailingInfoArray = Array.isArray(mailingInfoArray) ? mailingInfoArray : [mailingInfoArray];
   var variables = [
     {name: 'BASE_URL', content: baseUrl}
@@ -144,6 +78,48 @@ module.exports.txnEmailOld = function(mailingInfoArray, emailType, variables){
         }
       }
     });
+  }
+
+
+  console.log("###############");
+  console.log("emailType:"+emailType);
+  console.log(variables);
+  console.log("###############");
+
+  /*
+  * Rewritten mail logic. Original HabtRPG uses Kue and a separaate email wrapper for mandrill API
+  *
+  */
+
+  var emailTypeSupported = false;
+  if(emailType == "reset-password"){
+      var mailData = {
+        from: "The Habit Game<play@raisingyourga.me>", // sender address
+        to: mailingInfoArray[0].email, // list of receivers
+        subject: "Forgot Password", // Subject line
+        text: "Forgot Password", // plaintext body
+        html: "Here's your new password! <b>"+variables[1].content+"</b>" // html body
+      };
+
+      emailTypeSupported = true;
+  }
+
+  if(emailTypeSupported){
+      var smtpTransport = nodemailer.createTransport("SMTP",{
+        host: nconf.get('SMTP_HOST'),
+        port: nconf.get('SMTP_PORT'),
+        secure: nconf.get('SMTP_TLS'),
+        auth: {
+          user: nconf.get('SMTP_USER'),
+          pass: nconf.get('SMTP_PASS')
+        }
+      });
+      smtpTransport.sendMail(mailData, function(error, response){
+          var logging = require('./logging');
+        if(error) logging.error(error);
+        else logging.info("Message sent: " + response.message);
+        smtpTransport.close(); // shut down the connection pool, no more messages
+      });    
   }
 }
 
