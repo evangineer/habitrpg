@@ -68,6 +68,53 @@ module.exports.txnEmail = function(mailingInfoArray, emailType, variables){
     return (mailingInfo.email && mailingInfo.canSend);
   });
 
+  // create reusable transport method (opens pool of SMTP connections)
+  var smtpTransport = nodemailer.createTransport("SMTP",{
+      host: "mail.gandi.net", // hostname
+      secureConnection: true, // use SSL
+      port: 465, // port for secure SMTP
+      auth: {
+          user: "admin@raisingyourga.me",
+          pass: "kKrP09bK5v7vcBFa5SlfVPZG8"
+      }
+  });
+
+  // setup e-mail data with unicode symbols
+  var mailOptions = {
+      from: "Test ✔ <haha@gmail.com>", // sender address
+      to: mailingInfoArray,
+      subject: "test ✔", // Subject line
+      text: "test ✔", // plaintext body
+      html: "variables✔" // html body
+  };
+
+  // send mail with defined transport object
+  smtpTransport.sendMail(mailOptions, function(error, response){
+      if(error){
+          console.log(error);
+      }else{
+          console.log("Message sent: " + response.message);
+      }
+
+      // if you don't want to use this transport object anymore, uncomment following line
+      smtpTransport.close(); // shut down the connection pool, no more messages
+  });
+
+}
+
+module.exports.txnEmailOld = function(mailingInfoArray, emailType, variables){
+  var mailingInfoArray = Array.isArray(mailingInfoArray) ? mailingInfoArray : [mailingInfoArray];
+  var variables = [
+    {name: 'BASE_URL', content: baseUrl}
+  ].concat(variables || []);
+
+  // It's important to pass at least a user with its `preferences` as we need to check if he unsubscribed
+  mailingInfoArray = mailingInfoArray.map(function(mailingInfo){
+    return mailingInfo._id ? getUserInfo(mailingInfo, ['email', 'name', 'canSend']) : mailingInfo;
+  }).filter(function(mailingInfo){
+    return (mailingInfo.email && mailingInfo.canSend);
+  });
+
   // When only one recipient send his info as variables
   if(mailingInfoArray.length === 1 && mailingInfoArray[0].name){
     variables.push({name: 'RECIPIENT_NAME', content: mailingInfoArray[0].name});
