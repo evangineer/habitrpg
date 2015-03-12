@@ -79,10 +79,13 @@ module.exports.txnEmail = function(mailingInfoArray, emailType, variables){
       }
   });
 
+console.log("##############");
+console.log(variables);
+console.log("##############");
   // setup e-mail data with unicode symbols
   var mailOptions = {
-      from: "Test ✔ <haha@gmail.com>", // sender address
-      to: mailingInfoArray,
+      from: "Test ✔ <play@raisingyourga.me>", // sender address
+      to: mailingInfoArray[0].email,
       subject: "test ✔", // Subject line
       text: "test ✔", // plaintext body
       html: "variables✔" // html body
