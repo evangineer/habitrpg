@@ -9,8 +9,8 @@
     "NODE_ENV":"development",
     "SESSION_SECRET":"YOUR SECRET HERE",
     "ADMIN_EMAIL": "you@yours.com",
-    "SMTP_USER":"admin@raisingyourga.me",
-    "SMTP_PASS":"kKrP09bK5v7vcBFa5SlfVPZG8",
+    "SMTP_USER":"user@example.com",
+    "SMTP_PASS":"password",
     "SMTP_SERVICE":"Gandi",
     "SMTP_HOST":"mail.gandi.net",
     "SMTP_PORT": 465,
@@ -23,9 +23,9 @@
     "GA_ID": "GA_ID",
     "FLAG_REPORT_EMAIL": "email@mod.com",
     "EMAIL_SERVER": {
-        "url": "hhtp://mail.gandi.net",
-        "authUser": "admin@raisingyourga.me",
-        "authPassword": "kKrP09bK5v7vcBFa5SlfVPZG8" 
+        "url": "http://webserviceexample.com",
+        "authUser": "user@example.com",
+        "authPassword": "password" 
     },
     "S3":{
         "bucket":"bucket",
