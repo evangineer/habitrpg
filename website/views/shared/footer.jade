@@ -9,12 +9,6 @@ footer.footer(ng-controller='FooterCtrl')
       .col-sm-3
         h4=env.t('footerCompany')
         ul.list-unstyled
-          if (!env.isStaticPage)
-            li
-              .btn.btn-sm.btn-success(ng-click='openModal("buyGems",{track:"Gems > Donate"})')
-                span.glyphicon.glyphicon-heart
-                |&nbsp;
-                =env.t('companyDonate')
           li
             a(target='_blank', href='http://raisingyourga.me/')=env.t('companyAbout')
           li
