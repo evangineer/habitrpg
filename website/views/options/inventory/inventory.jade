@@ -27,9 +27,9 @@ script(type='text/ng-template', id='partials/options.inventory.seasonalshop.html
       .col-md-10
         .popover.static-popover.fade.right.in
           .arrow
-          h3.popover-title!=env.t('seasonalShopClosedTitle', {linkStart:"<a href='http://blog.habitrpg.com/who' target='_blank'>", linkEnd: "</a>"})
-          .popover-content
-            p!=env.t('seasonalShopClosedText', {linkStart:"<a href='http://habitrpg.wikia.com/wiki/Grand_Galas' target='_blank'>", linkEnd: "</a>"})
+          // h3.popover-title!=env.t('seasonalShopClosedTitle', {linkStart:"<a href='http://blog.habitrpg.com/who' target='_blank'>", linkEnd: "</a>"})
+          // .popover-content
+          //   p!=env.t('seasonalShopClosedText', {linkStart:"<a href='http://habitrpg.wikia.com/wiki/Grand_Galas' target='_blank'>", linkEnd: "</a>"})
   // br
     .well(ng-if='User.user.achievements.rebirths > 0')=env.t('seasonalShopRebirth')
     li.customize-menu.inventory-gear
@@ -69,7 +69,7 @@ script(type='text/ng-template', id='partials/options.inventory.timetravelers.htm
       .col-md-10
         .popover.static-popover.fade.right.in
           .arrow
-          h3.popover-title!=env.t('timeTravelersTitleNoSub', {linkStartTyler: "<a href='https://github.com/lefnire' target='_blank'>", linkStartVicky: "<a href='http://blog.habitrpg.com/who' target='_blank'>", linkEnd: "</a>"})
+          // h3.popover-title!=env.t('timeTravelersTitleNoSub', {linkStartTyler: "<a href='https://github.com/lefnire' target='_blank'>", linkStartVicky: "<a href='http://blog.habitrpg.com/who' target='_blank'>", linkEnd: "</a>"})
           .popover-content
             p!=env.t('timeTravelersPopoverNoSub', {linkStart: "<a href='https://habitrpg.com/#/options/settings/subscription' target='_blank'>", linkEnd: "</a>"})
     .row.stable(ng-if='user.purchased.plan.consecutive.trinkets > 0')
@@ -83,7 +83,7 @@ script(type='text/ng-template', id='partials/options.inventory.timetravelers.htm
             .pull-right
               span.inventory_special_trinket.inline-gems
               b x{{user.purchased.plan.consecutive.trinkets}}
-            p!=env.t('timeTravelersPopover', {linkStart: "<a href='http://habitrpg.wikia.com/wiki/Mystery_Item' target='_blank'>", linkEnd: "</a>"})
+            // p!=env.t('timeTravelersPopover', {linkStart: "<a href='http://habitrpg.wikia.com/wiki/Mystery_Item' target='_blank'>", linkEnd: "</a>"})
 
       .col-md-12
         li.customize-menu.inventory-gear
@@ -166,8 +166,8 @@ script(type='text/ng-template', id='partials/options.inventory.drops.html')
               td
                 .popover.static-popover.fade.right.in
                   .arrow
-                  h3.popover-title
-                    a(target='_blank', href='http://www.kickstarter.com/profile/523661924')=env.t('alexander')
+                  // h3.popover-title
+                  //  a(target='_blank', href='http://www.kickstarter.com/profile/523661924')=env.t('alexander')
                   .popover-content
                     p=env.t('welcomeMarket')
                     p
