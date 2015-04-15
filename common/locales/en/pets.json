@@ -13,7 +13,7 @@
     "hydra": "Hydra",
     "mantisShrimp": "Mantis Shrimp",
     "mammoth": "Woolly Mammoth",
-    "rarePetPop1": "Click the gold paw to learn more about how you can obtain this rare pet through contributing to HabitRPG!",
+    "rarePetPop1": "Click the gold paw to learn more about how you can obtain this rare pet through contributing to the Habit Game!",
     "rarePetPop2": "How to Get this Pet!",
     "potion": "<%= potionType %> Potion",
     "egg": "<%= eggType %> Egg",

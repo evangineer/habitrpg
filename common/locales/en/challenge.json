@@ -35,7 +35,7 @@
     "prize": "Prize",
     "prizePop": "If someone can 'win' your challenge, you can optionally award that winner a Gem prize. Max = #gems you own (+ guild.gems, if you created this challenge's guild). Note: This prize can't be changed later and will not be refunded if challenge is cancelled.",
     "publicChallenges": "Minimum 1 Gem for <strong> public challenges </strong> (helps prevent spam, it really does).",
-    "officialChallenge": "Official HabitRPG Challenge",
+    "officialChallenge": "Official the Habit Game Challenge",
     "by": "by",
     "participants": "Participants",
     "join": "Join",
